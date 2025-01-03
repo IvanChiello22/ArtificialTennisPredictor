@@ -5,7 +5,7 @@ from datetime import timedelta
 
 
 file_path = "Dataset_ATP.csv"
-cleaned_file_path = r"C:\Users\Ivan\PycharmProjects\ArtificialTennisPredictor\data\processed\Dataset_intermedio_withWR.csv"
+cleaned_file_path = r"C:\Users\Ivan\PycharmProjects\ArtificialTennisPredictor\data\processed\Dataset_intermedio_withProb .csv"
 
 # Usa 'sep' per cambiare il delimitatore standard di pandas "," con ";"
 df = pd.read_csv(file_path, sep = ";")
