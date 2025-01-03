@@ -5,7 +5,7 @@ from datetime import timedelta
 
 
 file_path = "Dataset_ATP.csv"
-cleaned_file_path = r"C:\Users\Ivan\PycharmProjects\ArtificialTennisPredictor\data\processed\Dataset_intermedio_withProb .csv"
+cleaned_file_path = r"/data/processed/Dataset_intermedio_withProb.csv"
 
 # Usa 'sep' per cambiare il delimitatore standard di pandas "," con ";"
 df = pd.read_csv(file_path, sep = ";")
@@ -44,7 +44,7 @@ def calculate_recent_winrate(df, time_window=365):
     Calcola il Winrate dinamico limitato all'ultimo anno per Player 1 e Player 2, utilizzando l'indicizzazione su 'Date'.
     """
     df = df.sort_values(by='Date')  # Ordinare per data
-    df.set_index('Date', inplace=True)  # Impostare 'Date' come indice
+    df.set_index('Date', inplace=True, drop=False)  # Impostare 'Date' come indice
     player1_wr = []
     player2_wr = []
 
