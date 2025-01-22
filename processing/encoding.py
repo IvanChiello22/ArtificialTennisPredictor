@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 #Directory radice del progetto
 base_dir = Path(__file__).resolve().parent.parent  # Risali di un livello
@@ -52,7 +52,6 @@ round_mapping = {
 def encode_dataset(df):
     df_cleaned = df.copy()
 
-    df_cleaned = df_cleaned.drop(columns=['Tournament'])
 
     df_cleaned['Series_encoded'] = df_cleaned['Series'].map(series_mapping)
     df_cleaned.insert(2, 'Series_encoded', df_cleaned.pop('Series_encoded'))
@@ -69,13 +68,16 @@ def encode_dataset(df):
     df_cleaned.insert(8, 'Round_encoded', df_cleaned.pop('Round_encoded'))
 
     #--------------------------------------------------------------------------------------------------------------------
+    #
+    scaler = StandardScaler()
+    # Applica la standardizzazione alle colonne Rank_1 e Rank_2
+    df_cleaned[['Rank_1', 'Rank_2']] = scaler.fit_transform(df_cleaned[['Rank_1','Rank_2']])
     #--------------------------------------------------------------------------------------------------------------------
 
     df_cleaned['Winner_encoded'] = df_cleaned.apply(lambda row: 0 if row['Winner'] == row['Player_1'] else 1, axis=1)
-    df_cleaned.insert(17, 'Winner_encoded', df_cleaned.pop('Winner_encoded'))
+    df_cleaned.insert(16, 'Winner_encoded', df_cleaned.pop('Winner_encoded'))
     #--------------------------------------------------------------------------------------------------------------------
 
-    df_cleaned = df_cleaned.drop(columns=['Score']) #HO AGGIUNTO ODD PER CONTROLLARE IL FUNZIONAMENTO DOPO
     #--------------------------------------------------------------------------------------------------------------------
 
     return df_cleaned
