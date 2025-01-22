@@ -69,22 +69,6 @@ def encode_dataset(df):
     df_cleaned.insert(8, 'Round_encoded', df_cleaned.pop('Round_encoded'))
 
     #--------------------------------------------------------------------------------------------------------------------
-    # Unire tutte le occorrenze di Player_1 e Player_2 per ottenere una codifica unica
-    all_players = pd.concat([df_cleaned['Player_1'], df_cleaned['Player_2']]).unique()
-
-    # Creare un LabelEncoder per la codifica comune
-    common_encoder = LabelEncoder()
-
-    # Adattare l'encoder sui valori unici combinati
-    common_encoder.fit(all_players)
-
-    # Codificare entrambe le colonne con lo stesso encoder
-    df_cleaned['Player_1_encoded'] = common_encoder.transform(df_cleaned['Player_1'])
-    df_cleaned['Player_2_encoded'] = common_encoder.transform(df_cleaned['Player_2'])
-
-    df_cleaned.insert(12, 'Player_1_encoded', df_cleaned.pop('Player_1_encoded'))
-    df_cleaned.insert(15, 'Player_2_encoded', df_cleaned.pop('Player_2_encoded'))
-
     #--------------------------------------------------------------------------------------------------------------------
 
     df_cleaned['Winner_encoded'] = df_cleaned.apply(lambda row: 0 if row['Winner'] == row['Player_1'] else 1, axis=1)
