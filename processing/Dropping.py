@@ -17,7 +17,7 @@ df = pd.read_csv(file_path, low_memory=False)
 
 def drop_dataset(df):
     df_cleaned = df.copy()
-    df_cleaned = df_cleaned.drop(columns=['Series','Surface','Round','Player_1','Player_2','Winner', 'Score','Tournament'])
+    df_cleaned = df_cleaned.drop(columns=['Series','Surface','Round','Player_1','Player_2','Winner', 'Score','Tournament', 'Delta_Rank'])
 
 
     return df_cleaned
