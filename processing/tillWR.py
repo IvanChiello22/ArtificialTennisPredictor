@@ -1,5 +1,36 @@
-from pathlib import Path
+"""
+Script di Pre-Processing dei Dati per Analisi Tennis
 
+Questo script si occupa di effettuare un primo livello di pre-processing del dataset ATP per renderlo pronto
+alle successive fasi di analisi e modellazione.
+Il file processa un dataset grezzo in formato CSV contenente dati relativi ai match di tennis e produce un file
+pulito e arricchito con nuove variabili calcolate.
+
+Principali operazioni eseguite:
+1. **Caricamento dei dati**: Lettura del dataset grezzo da file CSV utilizzando pandas.
+2. **Conversione delle date**: Trasformazione della colonna "Date" in formato datetime per consentire un'elaborazione basata sul tempo.
+3. **Calcolo del Delta Rank**: Creazione di una nuova variabile `Delta_Rank`, che rappresenta la differenza tra i ranking dei due giocatori.
+4. **Calcolo del WinRate Dinamico**:
+   - Per ogni match, viene calcolato il WinRate recente (ultimi 365 giorni) per entrambi i giocatori.
+   - Questa operazione tiene conto dei match giocati da ciascun giocatore nell'anno precedente alla data del match corrente.
+5. **Pulizia dei dati**: Eliminazione di righe contenenti valori invalidi o indesiderati (es. `-1`).
+6. **Esportazione dei dati**: Salvataggio del dataset processato in un nuovo file CSV, per un accesso rapido nelle fasi successive.
+
+Struttura del codice:
+- La funzione `calculate_recent_winrate` è la parte centrale del codice, dove viene implementato il calcolo del WinRate dinamico.
+- Le operazioni sul dataset sono strutturate in modo sequenziale e mirano a migliorare la leggibilità e la manutenibilità del codice.
+- Viene utilizzata la libreria `pandas` per la manipolazione dei dati e la libreria `pathlib` per la gestione dei percorsi file in modo robusto.
+
+Output:
+- Un dataset pulito e arricchito (`Dataset_WR.csv`), pronto per essere utilizzato nelle fasi successive di analisi o modellazione.
+
+Nota:
+Questo script è il primo di una sequenza di script progettati per elaborare i dati di tennis. I prossimi file potrebbero utilizzare il dataset generato qui come input per ulteriori trasformazioni o analisi.
+
+"""
+
+
+from pathlib import Path
 import pandas as pd
 from datetime import timedelta
 

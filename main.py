@@ -1,3 +1,44 @@
+"""
+Questo script consente di utilizzare un modello di classificazione preaddestrato per prevedere l'esito di una partita
+di tennis basandosi su input forniti dall'utente.
+
+**Flusso dello script**:
+1. **Caricamento del modello**:
+    - Il modello addestrato viene caricato da un file `.joblib`.
+    - In caso di errore nel caricamento, viene restituito un messaggio di errore.
+
+2. **Input dati utente**:
+    - L'utente fornisce i dati per la partita direttamente da tastiera (ad es. Rank, Winrate, Odds, ecc.).
+    - I dati sono normalizzati o standardizzati se necessario, per assicurare coerenza con il modello addestrato.
+
+3. **Predizione**:
+    - Il modello predice il vincitore della partita (Player 1 o Player 2) sulla base dei dati forniti.
+    - Viene stampato a schermo il risultato della predizione.
+
+**Dati richiesti dall'utente**:
+- `Player 1 WR` e `Player 2 WR`: Winrate dei giocatori.
+- `Rank 1` e `Rank 2`: Posizioni nel ranking dei due giocatori (standardizzate internamente).
+- `Pts 1` e `Pts 2`: Punti di ciascun giocatore.
+- `Odd 1` e `Odd 2`: Quote per ciascun giocatore (utilizzate per calcolare probabilità normalizzate).
+- `Round`, `Series`, `Surface`, `Best of`: Altre caratteristiche del match.
+
+**Note tecniche**:
+- Lo script normalizza le quote (`Odd_1` e `Odd_2`) per ottenere le probabilità normalizzate di vincita per ciascun giocatore.
+- Lo standard scaler viene utilizzato per standardizzare i rank (`Rank_1` e `Rank_2`).
+- È necessario che il modello caricato includa l'ordine delle feature, così da mappare correttamente i dati inseriti dall'utente.
+
+**Output**:
+- Lo script stampa il vincitore predetto (Player 1 o Player 2).
+
+**Prerequisiti**:
+- Assicurarsi che il file del modello (`model.joblib`) esista nella directory specificata.
+- Le feature nel modello addestrato devono corrispondere esattamente ai dati richiesti dall'utente.
+
+**Esecuzione**:
+- Eseguire il file e seguire le istruzioni fornite a schermo per inserire i dati richiesti.
+"""
+
+
 from pathlib import Path
 
 import numpy as np

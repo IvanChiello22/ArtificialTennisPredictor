@@ -1,3 +1,36 @@
+"""
+Questo script esegue l'addestramento e la valutazione di un modello di classificazione basato su Random Forest
+per prevedere l'esito di incontri di tennis utilizzando split temporali del dataset.
+
+**Flusso del codice**:
+1. **Caricamento e preparazione del dataset**:
+    - I dati vengono ordinati cronologicamente in base alla colonna 'Date'.
+    - Viene applicata una suddivisione temporale in base a finestre mobili definite da `window_size` (addestramento) e `step_size` (test).
+
+2. **Definizione del modello**:
+    - Viene utilizzato un classificatore Random Forest con parametri configurati per gestire la complessità del problema.
+
+3. **Addestramento e valutazione**:
+    - Per ogni split temporale:
+        - Si addestra il modello sui dati di addestramento.
+        - Si valuta il modello sui dati di test calcolando metriche come Accuracy, Precision, Recall e F1-Score.
+        - Si stampa la matrice di confusione e si verifica l'importanza delle feature.
+
+4. **Output e salvataggio**:
+    - Il modello addestrato viene salvato in un file `.joblib` per utilizzi futuri.
+    - Le metriche di performance e l'importanza delle feature vengono salvate in file CSV per ulteriori analisi.
+
+**Output principali**:
+- Modello salvato: `model.joblib`
+- Importanza delle feature: `information_gain.csv`
+- Confronto previsioni/valori reali: `results.csv`
+
+**Nota**:
+- Lo script gestisce il tempo come una variabile fondamentale per simulare un ambiente di previsione nel mondo reale.
+- Alcune colonne non pertinenti al processo di addestramento sono escluse manualmente per migliorare l'efficienza e la performance del modello.
+"""
+
+
 from pathlib import Path
 
 from joblib import dump

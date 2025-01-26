@@ -1,3 +1,39 @@
+"""
+Script di Pulizia e Calcolo delle Probabilità Implicite delle Quote
+
+Questo script si occupa di pulire e trasformare il dataset generato nella fase precedente (`Dataset_WR.csv`),
+focalizzandosi sull'elaborazione delle colonne contenenti le quote (`Odd_1` e `Odd_2`) per calcolare le probabilità implicite dei giocatori.
+L'obiettivo è produrre un dataset che includa probabilità normalizzate e pronte per l'analisi o la modellazione.
+
+Principali operazioni eseguite:
+1. **Caricamento dei dati**: Lettura del dataset processato nella fase precedente.
+2. **Gestione delle anomalie nei dati delle quote**:
+   - Conversione delle quote da stringa a formato numerico float, gestendo eventuali separatori decimali (virgola/punto).
+   - Rimozione di valori anomali o non validi (es. valori estremamente grandi o piccoli rappresentati in notazione scientifica).
+   - Correzione delle quote che presentano valori sproporzionati spostando il punto decimale per normalizzarle.
+3. **Calcolo delle Probabilità Implicite**:
+   - Le probabilità implicite sono calcolate come l'inverso delle quote (`1 / Odd`).
+   - Le probabilità sono normalizzate affinché la loro somma per un match sia pari a 1.
+4. **Arrotondamento delle Probabilità**: Le probabilità normalizzate vengono arrotondate a 4 decimali per semplificare l'analisi.
+5. **Esportazione dei dati**: Salvataggio del dataset processato in un file CSV (`Dataset_Prob_v2.csv`).
+
+Struttura del codice:
+- **Funzioni definite**:
+  - `is_scientific(x)`: Controlla se un valore è rappresentato in notazione scientifica.
+  - `convert_to_float(value)`: Converte una stringa contenente una quota in formato float, gestendo separatori errati.
+  - `move_dot(x)`: Sposta il punto decimale di un valore per correggere eventuali errori nei dati delle quote.
+  - `process_Prob(df)`: Applica i passaggi sopra elencati per elaborare l'intero dataset.
+- Il codice è modulare e ogni passaggio è chiaramente separato per garantire manutenibilità e chiarezza.
+
+Output:
+- Un dataset pulito e arricchito (`Dataset_Prob_v2.csv`), con colonne per le probabilità normalizzate (`Prob_1_norm`, `Prob_2_norm`).
+
+Nota:
+Questo script è il secondo di una sequenza. Utilizza il dataset generato nella fase precedente e prepara i dati per le successive analisi, come la modellazione predittiva o l'addestramento di modelli di machine learning.
+
+"""
+
+
 from pathlib import Path
 
 import pandas as pd

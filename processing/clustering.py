@@ -17,24 +17,6 @@ data = pd.read_csv(file_path, low_memory=False)
 data = data.drop(columns=["Date"])
 
 
-# Scatter plot: Rank_1 vs Rank_2
-plt.scatter(data['Rank_1'], data['Rank_2'], s=50, alpha=0.7, edgecolors='k')
-plt.title("Relazione tra Rank_1 e Rank_2")
-plt.xlabel("Rank_1")
-plt.ylabel("Rank_2")
-plt.grid(True)
-plt.show()
-
-
-# Scatter plot: Prob_1_norm vs Prob_2_norm
-plt.scatter(data['Prob_1_norm'], data['Prob_2_norm'], s=50, alpha=0.7, edgecolors='k')
-plt.title("Relazione tra Prob_1_norm e Prob_2_norm")
-plt.xlabel("Prob_1_norm")
-plt.ylabel("Prob_2_norm")
-plt.grid(True)
-plt.show()
-
-
 # Scatter plot: Odd_1 vs Odd_2
 plt.scatter(data['Odd_1'], data['Odd_2'], s=50, alpha=0.7, edgecolors='k')
 plt.title("Relazione tra Odd_1 e Odd_2")
@@ -43,13 +25,6 @@ plt.ylabel("Odd_2")
 plt.grid(True)
 plt.show()
 
-# Scatter plot: Pts_1 vs Pts_2 con dimensione basata su Best of
-plt.scatter(data['Pts_1'], data['Pts_2'], s=data['Best of'] * 20, alpha=0.7, edgecolors='k')
-plt.title("Relazione tra Pts_1 e Pts_2 (Dimensione = Best of)")
-plt.xlabel("Pts_1")
-plt.ylabel("Pts_2")
-plt.grid(True)
-plt.show()
 
 # --- 1. Applica il clustering agglomerativo ---
 agg_clustering = AgglomerativeClustering(n_clusters=None, distance_threshold=0.5)  # Auto-detect cluster
@@ -81,25 +56,6 @@ outliers = np.where(np.isin(labels, small_clusters))[0]
 
 print(f"Outlier trovati: {len(outliers)}")
 print(f"Indici degli outlier: {outliers}")
-
-
-# Scatter plot: Rank_1 vs Rank_2
-plt.scatter(data['Rank_1'], data['Rank_2'], s=50, alpha=0.7, edgecolors='k')
-plt.title("Relazione tra Rank_1 e Rank_2")
-plt.xlabel("Rank_1")
-plt.ylabel("Rank_2")
-plt.grid(True)
-plt.show()
-
-
-
-# Scatter plot: Prob_1_norm vs Prob_2_norm
-plt.scatter(data['Prob_1_norm'], data['Prob_2_norm'], s=50, alpha=0.7, edgecolors='k')
-plt.title("Relazione tra Prob_1_norm e Prob_2_norm")
-plt.xlabel("Prob_1_norm")
-plt.ylabel("Prob_2_norm")
-plt.grid(True)
-plt.show()
 
 
 
